@@ -60,9 +60,23 @@ int acl_fiber_scheduled(void)
 static void thread_free(void *ctx)
 {
 	THREAD *tf = (THREAD *) ctx;
+	RING *head;
+	ACL_FIBER *fiber;
+	unsigned int i;
 
 	if (__thread_fiber == NULL) {
 		return;
+	}
+
+	/* free fiber object in the dead fibers link */
+	while ((head = ring_pop_head(&__thread_fiber->dead))) {
+		fiber = RING_TO_APPL(head, ACL_FIBER, me);
+		fiber_free(fiber);
+	}
+
+	/* free all possible aliving fiber object */
+	for (i = 0; i < __thread_fiber->slot; i++) {
+		fiber_free(__thread_fiber->fibers[i]);
 	}
 
 	if (tf->fibers) {
@@ -75,6 +89,7 @@ static void thread_free(void *ctx)
 	if (__main_fiber == __thread_fiber) {
 		__main_fiber = NULL;
 	}
+
 	__thread_fiber = NULL;
 }
 
@@ -303,7 +318,7 @@ static void fiber_kick(int max)
 		if (head == NULL) {
 			break;
 		}
-		fiber = RING_TO_APPL(head, ACL_FIBER,me);
+		fiber = RING_TO_APPL(head, ACL_FIBER, me);
 		fiber_free(fiber);
 		max--;
 	}
@@ -329,7 +344,7 @@ static void fiber_swap(ACL_FIBER *from, ACL_FIBER *to)
 
 		__thread_fiber->fibers[slot] =
 			__thread_fiber->fibers[--__thread_fiber->slot];
-		__thread_fiber->fibers[slot]->slot = slot;
+		__thread_fiber->fibers[slot]->slot = (unsigned) slot;
 
 		ring_prepend(&__thread_fiber->dead, &from->me);
 	}
@@ -470,7 +485,11 @@ int acl_fiber_yield(void)
 	// when switched overflows, it will be set to 0, then n saved last
 	// switched's value will larger than switched, so we need to use
 	// abs function to avoiding this problem
+#if defined(__APPLE__)
+	return (int) (__thread_fiber->switched - n - 1);
+#else
 	return abs(__thread_fiber->switched - n - 1);
+#endif
 }
 
 int acl_fiber_ndead(void)

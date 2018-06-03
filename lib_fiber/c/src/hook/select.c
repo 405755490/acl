@@ -129,10 +129,12 @@ static struct pollfd *pfds_create(int *nfds, fd_set *readfds,
 			fds[fd].events |= POLLOUT;
 		}
 
+#if 0
 		if (exceptfds && FD_ISSET(fd, exceptfds)) {
 			fds[fd].fd = fd;
 			fds[fd].events |= POLLERR | POLLHUP;
 		}
+#endif
 	}
 	return fds;
 }
@@ -165,7 +167,7 @@ int acl_fiber_select(int nfds, fd_set *readfds, fd_set *writefds,
 	}
 
 	if (timeout != NULL)
-		timo = timeout->tv_sec * 1000 + timeout->tv_usec / 1000;
+		timo = (int) (timeout->tv_sec * 1000 + timeout->tv_usec / 1000);
 	else
 		timo = -1;
 

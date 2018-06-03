@@ -1,23 +1,21 @@
-%define release_id 88
+%define release_id 2
 
 Summary:        The powerful c/c++ library and server framework
 Name:           acl-libs
-Version:        3.3.0
+Version:        3.4.1
 Release:        %{release_id}
 Group:          System/Libs
 License:        IBM
-URL:            http://cdnlog-web.qiyi.domain
+URL:            https://github.com/acl-dev/
 Packager:       Zhang Qiang <qiangzhang@qiyi.com>, Wang Haibin <wanghaibin@qiyi.com>
 #Source2:        acl-master.json
 #Source3:        acl-tools.json
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 Source:         http://example.com/%{name}-%{version}.tar.gz
 
-%define debug_package %{nil}
 %description
 
 One advanced C/C++ library for Linux/Mac/FreeBSD/Solaris(x86)/Windows/Android/IOS http://zsxxsz.iteye.com/.
-
 
 %package -n acl-master
 Summary: acl master framework
@@ -134,6 +132,26 @@ fi
 #/opt/soft/services/acl-tools.json
 
 %changelog
+
+* Tue May 17 2018 zhengshuxin@qiyi.com 3.4.1-2-20180517.16
+- fixed bugs in acl_write_wait.c
+
+* Mon May 14 2018 zhengshuxin@qiyi.com 3.4.1-1-20180514.15
+- add new method in redis_client_cluster
+- add check_idle in connect_manager
+
+* Mon May 07 2018 zhengshuxin@qiyi.com 3.4.1-0-20180507.14
+- acl 3.4.1 released!
+
+* Sun Apr 29 2018 zhengshuxin@qiyi.com 3.4.0-0-20180429.20
+- acl 3.4.0 released!
+
+* Fri Apr 27 2018 zhengshuxin@qiyi.com 3.3.0-90-20180427.27
+- http: unsafe uri can be corrected
+
+* Tue Apr 12 2018 zhengshuxin@qiyi.com 3.3.0-89-20180412.20
+- thread_cond::wait: don't save log when waiting timedout
+- atomic: override constructur of atomic(const atomic&)
 
 * Mon Mar 20 2018 zhengshuxin@qiyi.com 3.3.0-88-20180320.10
 - fixed one bug in thread_cond::wait there was one problem when computing timeout

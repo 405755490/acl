@@ -136,6 +136,15 @@
     <ClCompile Include="src\stdlib\dns_service.cpp">
       <Filter>src\stdlib</Filter>
     </ClCompile>
+    <ClCompile Include="src\stdlib\diff_manager.cpp">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdlib\diff_object.cpp">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdlib\diff_string.cpp">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
     <ClCompile Include="src\stdlib\locker.cpp">
       <Filter>src\stdlib</Filter>
     </ClCompile>
@@ -442,12 +451,6 @@
     <ClCompile Include="src\redis\redis_list.cpp">
       <Filter>src\redis</Filter>
     </ClCompile>
-    <ClCompile Include="src\redis\redis_master.cpp">
-      <Filter>src\redis</Filter>
-    </ClCompile>
-    <ClCompile Include="src\redis\redis_slave.cpp">
-      <Filter>src\redis</Filter>
-    </ClCompile>
     <ClCompile Include="src\redis\redis_cluster.cpp">
       <Filter>src\redis</Filter>
     </ClCompile>
@@ -576,6 +579,12 @@
     </ClCompile>
     <ClCompile Include="src\serialize\gsoner.cpp">
       <Filter>src\serialize</Filter>
+    </ClCompile>
+    <ClCompile Include="src\redis\redis_master.cpp">
+      <Filter>src\redis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\redis\redis_slave.cpp">
+      <Filter>src\redis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -810,6 +819,15 @@
     <ClInclude Include="include\acl_cpp\stdlib\dns_service.hpp">
       <Filter>include\stdlib</Filter>
     </ClInclude>
+    <ClInclude Include="include\acl_cpp\stdlib\diff_manager.hpp">
+      <Filter>include\stdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="include\acl_cpp\stdlib\diff_object.hpp">
+      <Filter>include\stdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="include\acl_cpp\stdlib\diff_string.hpp">
+      <Filter>include\stdlib</Filter>
+    </ClInclude>
     <ClInclude Include="include\acl_cpp\stdlib\escape.hpp">
       <Filter>include\stdlib</Filter>
     </ClInclude>
@@ -997,9 +1015,6 @@
       <Filter>include\stdlib</Filter>
     </ClInclude>
     <ClInclude Include="include\acl_cpp\stdlib\thread_pool.hpp">
-      <Filter>include\stdlib</Filter>
-    </ClInclude>
-    <ClInclude Include="include\acl_cpp\stdlib\trigger.hpp">
       <Filter>include\stdlib</Filter>
     </ClInclude>
     <ClInclude Include="src\stream\aio_timer_delay_free.hpp">
